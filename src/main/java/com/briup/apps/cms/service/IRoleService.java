@@ -3,6 +3,7 @@ package com.briup.apps.cms.service;
 import com.briup.apps.cms.bean.Role;
 import com.briup.apps.cms.bean.extend.RoleExtend;
 import com.briup.apps.cms.utils.CustomerException;
+import com.briup.apps.cms.vm.RolePrivilegeVm;
 
 import java.util.List;
 
@@ -28,6 +29,6 @@ public interface IRoleService {
     List<RoleExtend> cascadePrivilegeFindAll();
 
     //设置角色权限
-    void setRolePrivilege(RoleExtend role)throws CustomerException;
+    void setRolePrivilege(RolePrivilegeVm role)throws CustomerException;
 
 }

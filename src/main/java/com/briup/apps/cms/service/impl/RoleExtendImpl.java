@@ -12,6 +12,7 @@ import com.briup.apps.cms.dao.extend.RoleExtendMapper;
 import com.briup.apps.cms.dao.extend.RolePrivilegeExtendMapper;
 import com.briup.apps.cms.service.IRoleService;
 import com.briup.apps.cms.utils.CustomerException;
+import com.briup.apps.cms.vm.RolePrivilegeVm;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -72,7 +73,7 @@ public class RoleExtendImpl implements IRoleService {
     }
 
     @Override
-    public void setRolePrivilege(RoleExtend role) throws CustomerException {
+    public void setRolePrivilege(RolePrivilegeVm role) throws CustomerException {
 
         List<Privilege> oldPrivileges = privilegeExtendMapper.selectByRoleId(role.getId());
         //获取旧q权限id数组
@@ -81,12 +82,7 @@ public class RoleExtendImpl implements IRoleService {
             oldPIds.add(p.getId());
         }
         //获取新权限id数组
-        List<Privilege> newPrivilege = role.getPrivileges();
-        List<Long> newPIds = new ArrayList<>();
-        for (Privilege p : newPrivilege) {
-            newPIds.add(p.getId());
-        }
-
+        List<Long> newPIds = role.getPrivileges();
         //遍历判断新的是否存在于旧的
         for (Long newPId:newPIds) {
             if (!oldPIds.contains(newPId)){

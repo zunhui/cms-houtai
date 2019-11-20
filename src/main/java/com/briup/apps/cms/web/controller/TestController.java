@@ -21,6 +21,8 @@ import java.util.List;
 @RequestMapping("/test")
 public class TestController {
 
+    //这是一个注释
+
     @Autowired
     private ITestService testService;
 
@@ -34,4 +36,5 @@ public class TestController {
         testService.saveOrUpdate(test);
         return "更新成功";
     }
+
 }

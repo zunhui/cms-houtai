@@ -5,6 +5,7 @@ import com.briup.apps.cms.bean.extend.RoleExtend;
 import com.briup.apps.cms.service.IRoleService;
 import com.briup.apps.cms.utils.Message;
 import com.briup.apps.cms.utils.MessageUtil;
+import com.briup.apps.cms.vm.RolePrivilegeVm;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -51,7 +52,7 @@ public class RoleController {
 
     @ApiOperation("设置角色权限")
     @PostMapping("setRolePrivilege")
-    public Message setRolePrivilege(RoleExtend role){
+    public Message setRolePrivilege(RolePrivilegeVm role){
         service.setRolePrivilege(role);
         return MessageUtil.success("更新成功!");
     }
