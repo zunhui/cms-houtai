@@ -3,6 +3,7 @@ package com.briup.apps.cms.web.controller;
 import com.briup.apps.cms.bean.User;
 import com.briup.apps.cms.bean.extend.UserExtend;
 import com.briup.apps.cms.service.IUserService;
+import com.briup.apps.cms.utils.JwtTokenUtil;
 import com.briup.apps.cms.utils.Message;
 import com.briup.apps.cms.utils.MessageUtil;
 import com.briup.apps.cms.vm.UserRoleVm;
@@ -91,11 +92,13 @@ public class UserController {
     @PostMapping("login")
     public Message login(@RequestBody UserVm userVm) {
         //1验证身份
+        User user = userservice.login(userVm);
         //2.产生一个token并缓存起来，
-        //3.返回
-        //模拟数据
+        // 2. 如果登录成功产生token,将token缓存起来，返回
+        String token = JwtTokenUtil.createJWT(user.getId(), user.getUsername());
+        // 3. 如果登录失败
         Map<String,String> map = new HashMap<>();
-        map.put("token","admin-token");
+        map.put("token",token);
         return MessageUtil.success(map);
     }
 
@@ -111,8 +114,9 @@ public class UserController {
     @ApiOperation("根据token查询用户信息")
     @GetMapping("info")
     public Message info(String token){
-        //通过token查询数据
-        UserExtend userExtend = userservice.extendFindById(1L);
+        // 1. 通过token获取用户信息  {id,use,gender,roles:[]}
+        long id = Long.parseLong(JwtTokenUtil.getUserId(token,JwtTokenUtil.base64Secret));
+        UserExtend userExtend = userservice.extendFindById(id);
         return MessageUtil.success(userExtend);
     }
 }

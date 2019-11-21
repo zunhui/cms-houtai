@@ -23,4 +23,9 @@
     FROM cms_user_role
     WHERE user_id=#{id,jdbcType=BIGINT}
   </select>
+  <select id="selectByName" parameterType="string" resultType="com.briup.apps.cms.bean.User">
+    SELECT *
+    FROM cms_user
+    WHERE username=#{username,jdbcType=VARCHAR}
+  </select>
 </mapper>

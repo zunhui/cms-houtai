@@ -1,5 +1,6 @@
 package com.briup.apps.cms.dao.extend;
 
+import com.briup.apps.cms.bean.User;
 import com.briup.apps.cms.bean.extend.UserExtend;
 import com.briup.apps.cms.dao.UserMapper;
 
@@ -19,6 +20,8 @@ public interface UserExtendMapper extends UserMapper {
     UserExtend selectById(long id);
 
     List<UserExtend> findExtendAll();
+
+    User selectByName(String username);
 
     List<Long> selectByUserId(Long id);
 }

@@ -10,6 +10,7 @@ import com.briup.apps.cms.dao.extend.UserExtendMapper;
 import com.briup.apps.cms.dao.extend.UserRoleExtendMapper;
 import com.briup.apps.cms.service.IUserService;
 import com.briup.apps.cms.utils.CustomerException;
+import com.briup.apps.cms.vm.UserVm;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -119,5 +120,17 @@ public class UserServiceImpl implements IUserService {
                 userRoleExtendMapper.deleteByRoleId(oldId);
             }
         }
+    }
+
+    @Override
+    public User login(UserVm userVm) {
+        User user = userExtendMapper.selectByName(userVm.getUsername());
+        if(user==null){
+            throw new CustomerException("该用户不存在");
+        }
+        if(!user.getPassword().equals(userVm.getPassword())){
+            throw new CustomerException("密码不匹配");
+        }
+        return user;
     }
 }

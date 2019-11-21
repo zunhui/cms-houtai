@@ -23,4 +23,6 @@ public interface IPrivilegeService {
 
      //查询权限树
      List<PrivilegeTree> findPrivilegeTree();
+
+     List<Privilege> findByUserId(long userId);
 }

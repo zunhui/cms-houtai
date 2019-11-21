@@ -19,7 +19,9 @@ public interface PrivilegeExtendMapper extends PrivilegeMapper {
 
     List<Privilege> findAllNoParentId();
 
-    List<Privilege> findByParentId(Long id);
+    List<Privilege> findByParentId(Long parentId);
+
+    List<Privilege> findByUserId(Long userId);
 
     List<Privilege> selectByRoleId(Long role_id);
 

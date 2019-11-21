@@ -3,6 +3,7 @@ package com.briup.apps.cms.service;
 import com.briup.apps.cms.bean.User;
 import com.briup.apps.cms.bean.extend.UserExtend;
 import com.briup.apps.cms.utils.CustomerException;
+import com.briup.apps.cms.vm.UserVm;
 
 import java.util.List;
 
@@ -41,4 +42,6 @@ public interface IUserService {
 
     //修改用户角色
     void setRoles(Long id, List<Long> roles) throws CustomerException;
+
+    User login(UserVm userVm);
 }
