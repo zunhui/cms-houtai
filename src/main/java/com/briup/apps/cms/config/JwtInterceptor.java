@@ -40,8 +40,8 @@ public class JwtInterceptor extends HandlerInterceptorAdapter {
         // 验证token是否有效--无效已做异常抛出，由全局异常处理后返回对应信息
         JwtTokenUtil.parseJWT(token, JwtTokenUtil.base64Secret);
         // 验证权限，通过token获取用户id，通过用户id获取权限，这里可以使用redis将用户信息维护在缓存中，减少与数据库交互次数
-//        long id = Long.parseLong(JwtTokenUtil.getUserId(token,JwtTokenUtil.base64Secret));
-//        this.auth(id,request.getServletPath());
+        long id = Long.parseLong(JwtTokenUtil.getUserId(token,JwtTokenUtil.base64Secret));
+        this.auth(id,request.getServletPath());
 
         return true;
     }
